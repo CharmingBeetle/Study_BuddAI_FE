@@ -1,8 +1,6 @@
 
 import React from "react";
-
 import { postAttempt } from "../api";
-// import Questions from "./Questions";
 import { useNavigate } from "react-router-dom";
 
 interface Quiz {
@@ -15,8 +13,6 @@ interface Quiz {
 interface QuizCardProps {
   quiz: Quiz;
 }
-
-
 
 const QuizCard: React.FC<QuizCardProps> = ({ quiz }) => {
 

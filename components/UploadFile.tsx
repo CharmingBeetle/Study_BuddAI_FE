@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { uploadFiles } from "../api";
 import useUserContext from "../src/contexts/useUserContext";
 import GenerateQuiz from "./GenerateQuiz";
@@ -18,13 +18,6 @@ function UploadFile({ quizName }: UploadFileProps) {
   const { loggedInUser } = useUserContext();
   const currentUser = loggedInUser.user_id.toString();
 
-  // useEffect(() => {
-  //   if (message) {
-  //       setMessage("")
-  //     return
-  //   }
-  // }, [message])
-  
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setFile(event.target.files[0]);

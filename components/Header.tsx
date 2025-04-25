@@ -9,8 +9,8 @@ import {
 } from "@clerk/clerk-react";
 import { useLocation } from "react-router-dom";
 import NavBarOtherPages from "./NavBarOtherPages"
-
-
+import '@clerk/clerk-react';
+import useUserContext from "../src/contexts/useUserContext";
 
 const Header: React.FC = () => {
   // Access the context
@@ -18,23 +18,22 @@ const Header: React.FC = () => {
   const location = useLocation();
   const hideOnRoutes = ["/","/login", "/createaccount"];
   const shouldShowUserProfile = !hideOnRoutes.includes(location.pathname);
-
+  const { loggedInUser } = useUserContext()
+  const username = loggedInUser.username;
 
   if (!context) {
     return <h1 className="title">Study BuddAI LOGO</h1>;
   }
-
-  // const { loggedInUser } = context;
 
   return (
     <div className="header-container text-white py-4 ">
       {shouldShowUserProfile && (
         <div className="userProfile">
           <SignedOut>
-            <SignInButton mode="modal" redirectUrl="/homepage">
+            <SignInButton mode="modal" redirecturl="/homepage">
               <button>Sign In</button>
             </SignInButton>
-            <SignUpButton mode="modal" redirectUrl="/homepage">
+            <SignUpButton mode="modal" redirecturl="/homepage">
               <button>Sign Up</button>
             </SignUpButton>
           </SignedOut>
@@ -44,8 +43,8 @@ const Header: React.FC = () => {
           </SignedIn>
         </div>
       )}
-      <img className="logo" src="../src/assets/logo.png" />
-      {/* <h2>Welcome {loggedInUser.username}</h2> */}
+      <img className="logo" src="../src/assets/logo.png"  alt="logo"/>
+      <h2 className=" welcome-msg">Welcome {username}</h2>
       <NavBarOtherPages />
     </div>
   );

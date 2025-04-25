@@ -799,3 +799,6 @@ margin: 30px;
   transform: translateY(-2px);
 }
 
+.cl-formFieldInputShowPasswordButton {
+  width: 20px;
+}

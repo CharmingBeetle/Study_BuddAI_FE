@@ -24,16 +24,6 @@ interface QuizQuestion {
   question_body: string;
 }
 
-// interface  Attempt  {
-//     attempt_id: number,
-//     quiz_id: number,
-//     score: string
-//   }
-
-// interface QuestionsProps {
-//     attempt: Attempt;
-// }
-
 const Questions: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>([]);
