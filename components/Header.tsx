@@ -30,10 +30,10 @@ const Header: React.FC = () => {
       {shouldShowUserProfile && (
         <div className="userProfile">
           <SignedOut>
-            <SignInButton mode="modal" redirecturl="/homepage">
+            <SignInButton mode="modal" fallbackRedirectUrl="/homepage">
               <button>Sign In</button>
             </SignInButton>
-            <SignUpButton mode="modal" redirecturl="/homepage">
+            <SignUpButton mode="modal" fallbackRedirectUrl="/homepage">
               <button>Sign Up</button>
             </SignUpButton>
           </SignedOut>

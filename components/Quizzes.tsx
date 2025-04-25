@@ -5,7 +5,7 @@ import useUserContext from "../src/contexts/useUserContext";
 import Lottie from "lottie-react";
 import animation from "../src/assets/loading.json"
 
-interface Quizzes {user_id: number,
+interface QuizData {user_id: number,
     quiz_id: number,
     file_id: number,
     created_at: string,
@@ -18,7 +18,7 @@ const Quizzes: React.FC = () => {
     const userId = loggedInUser.user_id;
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [quizzes, setQuizzes] = useState<Quizzes[]>([]);
+    const [quizzes, setQuizzes] = useState<QuizData[]>([]);
 
   useEffect(() => {
     if(!loggedInUser){
