@@ -5,13 +5,10 @@ import {
   getQuizQuestions,
   postAttemptAnswer,
 } from "../api";
-import { Link } from "react-router-dom";
 import animation from "../src/assets/loading.json";
 import Lottie from "lottie-react";
-// import NavBarOtherPages from "./NavBarOtherPages"
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 
 interface QuestionOption {
   question_options_id: number;
@@ -37,8 +34,6 @@ interface QuizQuestion {
 //     attempt: Attempt;
 // }
 
-
-
 const Questions: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quizQuestions, setQuizQuestions] = useState<QuizQuestion[]>([]);
@@ -51,9 +46,9 @@ const Questions: React.FC = () => {
   const [attemptLoading, setAttemptLoading] = useState<boolean | null>(null);
 
   const location = useLocation();
- 
+
   const data = location.state;
-  const attempt = data.data
+  const attempt = data.data;
   const navigate = useNavigate();
 
   // pass in attempt -> get quiz_id and attempt_id
@@ -65,7 +60,6 @@ const Questions: React.FC = () => {
       })
       .catch(() => {
         setError("Failed to load quiz questions.");
-   
       });
   }, []);
 
@@ -76,7 +70,7 @@ const Questions: React.FC = () => {
     getQuestionOptions(question.question_id)
       .then((data) => {
         setQuestionOptions(data);
-        setQuestionId(data[0].question_id)
+        setQuestionId(data[0].question_id);
         setSelectedOptionId(null);
         setError(null);
       })
@@ -91,7 +85,7 @@ const Questions: React.FC = () => {
     setSelectedOptionId(optionId);
   };
 
-  const handleNextQuestion = (event) => {
+  const handleNextQuestion = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAttemptLoading(true);
     setAttemptError(null);
     event.preventDefault();
@@ -102,13 +96,10 @@ const Questions: React.FC = () => {
       return;
     }
 
-
     // post selected answer here if needed
 
-    postAttemptAnswer(selectedOptionId, questionId, attempt.attempt_id)
-      .then((addedAttemptAnswer) => {
-
-      })
+    postAttemptAnswer(selectedOptionId, questionId || 0, attempt.attempt_id)
+      .then(() => {})
       .catch(() => {
         setAttemptError("You answer failed to submit, please try again!");
       })
@@ -121,8 +112,7 @@ const Questions: React.FC = () => {
     }
   };
 
-  const handleCompleteQuiz = (event) => {
-    
+  const handleCompleteQuiz = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAttemptLoading(true);
     setAttemptError(null);
     event.preventDefault();
@@ -132,18 +122,14 @@ const Questions: React.FC = () => {
       return;
     }
 
-    postAttemptAnswer(selectedOptionId, questionId, attempt.attempt_id)
+    postAttemptAnswer(selectedOptionId, questionId || 0, attempt.attempt_id)
       .then(() => {
-    
-        //const attempt_id = attempt.attempt_id
-        navigate(`/results`, { state: { attempt } })
-  
+        navigate(`/results`, { state: { attempt } });
       })
       .catch(() => {
         setAttemptError("You answer failed to submit, please try again!");
         setAttemptLoading(false);
-      })
-     
+      });
   };
 
   if (attemptLoading)
@@ -157,56 +143,61 @@ const Questions: React.FC = () => {
     );
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
-  const progress = (currentQuestionIndex+1)/(quizQuestions.length)
+  const progress = (currentQuestionIndex + 1) / quizQuestions.length;
 
   return (
-    <>  
+    <>
+      <main>
+        <div className="quiz">
+          <div className="progress">
+            <div
+              className="progress-bar progress-bar-striped"
+              role="progressbar"
+              style={{ width: `${progress * 100}%` }}
+              aria-valuenow={progress * 100}
+              aria-valuemin={0}
+              aria-valuemax={100}
+            ></div>
+          </div>
+          <div className="question-details">
+            <h2>Select an answer</h2>
+            <div className="question">
+              <h3>{currentQuestion?.question_body || "Loading..."}</h3>
 
-    {/* <NavBarOtherPages /> */}
-    <main>
-   
-    <div className="quiz">
- 
-      <div className="progress">
-      <div className="progress-bar progress-bar-striped" role="progressbar"
-      style={{ width: `${progress * 100}%` }}
-      aria-valuenow={progress * 100}
-      aria-valuemin="0"
-      aria-valuemax="100">
-      </div>
-    </div>
-    <div className="question-details">
-    <h2>Select an answer</h2>
-    <div className="question">
-      <h3>{currentQuestion?.question_body || "Loading..."}</h3>
+              <ul className="option-list">
+                {questionOptions.map((option) => (
+                  <OptionCard
+                    key={option.question_options_id}
+                    option={option}
+                    isSelected={selectedOptionId === option.question_options_id}
+                    onSelect={handleSelectOption}
+                  />
+                ))}
+              </ul>
 
-      <ul className="option-list">
-        {questionOptions.map((option) => (
-          <OptionCard
-            key={option.question_options_id}
-            option={option}
-            isSelected={selectedOptionId === option.question_options_id}
-            onSelect={handleSelectOption}
-          />
-        ))}
-      </ul>
+              {errorQuestion && <p>{errorQuestion}</p>}
+              {error && <p>{error}</p>}
+              {attemptError && <p>{attemptError}</p>}
 
-      {errorQuestion && <p>{errorQuestion}</p>}
-      {error && <p>{error}</p>}
-      {attemptError && <p>{attemptError}</p>}
-
-      {currentQuestionIndex < quizQuestions.length - 1 ? (
-        <button className="next-question-button" onClick={handleNextQuestion}>Next</button>
-      ) : (
-       
-          <button className="next-question-button" onClick={handleCompleteQuiz}>Complete Quiz</button>
-        
-      )}
-    </div>
-    
-    </div>
-    </div>
-    </main>
+              {currentQuestionIndex < quizQuestions.length - 1 ? (
+                <button
+                  className="next-question-button"
+                  onClick={handleNextQuestion}
+                >
+                  Next
+                </button>
+              ) : (
+                <button
+                  className="next-question-button"
+                  onClick={handleCompleteQuiz}
+                >
+                  Complete Quiz
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
     </>
   );
 };

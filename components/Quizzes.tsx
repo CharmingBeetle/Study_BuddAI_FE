@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { getQuizzes } from "../api";
 import QuizCard from "./QuizCard"; 
 import useUserContext from "../src/contexts/useUserContext";
@@ -10,14 +10,11 @@ interface Quizzes {user_id: number,
     quiz_name: string
 
 }
-
 interface Attempt {
     attempt_id: number,
     quiz_id: number,
     score: string
 }
-
-
 
 const Quizzes: React.FC = () => {
 
@@ -26,7 +23,11 @@ const Quizzes: React.FC = () => {
 
 
     const [error, setError] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean | null>(false);
+
+    if (error) {
+        return <div className="error">{error}</div>;
+    }
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [quizzes, setQuizzes] = useState<Quizzes[]>([]);
 
   useEffect(() => {
