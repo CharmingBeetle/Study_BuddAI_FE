@@ -57,11 +57,11 @@ study-buddai-be/
 | `/api/questions`               | POST   | Add questions to a quiz                          |
 | `/api/questions/:quiz_id`      | GET    | Get all questions for a specific quiz            |
 | `/api/question_options`        | POST   | Add answer options for a question                |
-| `/api/question_options/:id`    | GET    | Get options for a specific question              |
+| `/api/question_options/:question_id`    | GET    | Get options for a specific question              |
 | `/api/attempt`                 | POST   | Start a quiz attempt                             |
 | `/api/attempt/:id/submit`      | GET    | Submit and score a quiz attempt                  |
 | `/api/attempt_answer`          | POST   | Save an answer for a question in an attempt      |
-| `/api/attempt_answer/:id`      | GET    | Get a saved answer for a question                |
+| `/api/attempt_answer/:question_id`      | GET    | Get a saved answer for a question                |
 | `/api/generate_quiz`           | POST   | Generate a quiz from PDF content using AI        |
 
 ## 🛠️ Setup Instructions
@@ -106,6 +106,42 @@ study-buddai-be/
    npm run setup-db
    npm run seed
    ```
+## Docker instrcutions
+# Study BuddAI - Frontend
+
+## 🚀 Quick Start
+```bash
+# Development (hot-reload)
+npm run dev
+
+# Production build
+npm run build
+```
+
+## 🔧 Docker Setup
+```bash
+# Build image (from project root)
+docker build -t studybuddai-fe .
+
+# Run container
+docker run -p 5173:80 studybuddai-fe
+```
+
+## 🌐 Deployment Notes
+- **Ports**: 
+  - Dev: `5173` (Vite default)
+  - Prod: `80` (Nginx inside container)
+- **Environment Variables**:  
+  Add to `.env`:
+  ```env
+  VITE_API_URL=http://localhost:8080
+  ```
+
+## 🧠 Critical Knowledge
+- Uses **Clerk v5** for auth (`fallbackRedirectUrl` not `redirectUrl`)
+- Docker context must point to sibling `study-buddai-deploy` repo
+
+
 
 ### Development
 

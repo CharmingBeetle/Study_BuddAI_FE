@@ -28,7 +28,7 @@ const Quizzes: React.FC = () => {
     }
     getQuizzes(userId)
       .then((data) => {
-        setQuizzes(data)
+        setQuizzes(Array.isArray(data) ? data : [data]);
       })
       .catch(() => {
         setError("Failed to load quizzes");
