@@ -33,6 +33,6 @@ backend:
   phases:
     build:
       commands:
-        - cd ../backend              # Switch to backend directory
+        - cd ../Study_BuddAI_BE              # Switch to backend directory
         - docker build -t Study_BuddAI_BE .
         - echo "Docker image built"
