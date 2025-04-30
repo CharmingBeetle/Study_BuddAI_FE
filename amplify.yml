@@ -1,17 +1,38 @@
 version: 1
 frontend:
   phases:
+    # Install phase
     preBuild:
       commands:
-        - npm ci          # Installs dependencies
+        - nvm use 18  # Use Node 18 (or your preferred version)
+        - npm ci      # Clean install (faster than 'npm install')
+        - echo "VITE_API_BASE_URL=$VITE_API_BASE_URL" >> .env  # Inject backend URL
+
+    # Build phase
     build:
       commands:
-        - npm run build   # Builds your app
+        - npm run build
+
   artifacts:
-    baseDirectory: dist   # Your build output folder (e.g., 'build' for React)
+    # Configure based on your framework:
+    baseDirectory: dist               # For Vite/Vue/React
+    # baseDirectory: .next/out        # For Next.js (Static Export)
+    # baseDirectory: build            # For Create-React-App
     files:
-      - '**/*'            # Deploys all built files
-    discardPaths: no
+      - '**/*'                       # Deploy all built files
+    discardPaths: no                  # Preserve folder structure
+
   cache:
     paths:
-      - node_modules/**/* # Caches node_modules for faster builds
+      - node_modules/**/*            # Cache dependencies
+      - .next/cache/**/*             # For Next.js
+      - public/**/*                  # Cache static files (like logo.png)
+
+# For Docker-based backend (optional CI/CD)
+backend:
+  phases:
+    build:
+      commands:
+        - cd ../backend              # Switch to backend directory
+        - docker build -t Study_BuddAI_BE .
+        - echo "Docker image built"
