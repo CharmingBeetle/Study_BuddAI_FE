@@ -1,0 +1,17 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci          # Installs dependencies
+    build:
+      commands:
+        - npm run build   # Builds your app
+  artifacts:
+    baseDirectory: dist   # Your build output folder (e.g., 'build' for React)
+    files:
+      - '**/*'            # Deploys all built files
+    discardPaths: no
+  cache:
+    paths:
+      - node_modules/**/* # Caches node_modules for faster builds

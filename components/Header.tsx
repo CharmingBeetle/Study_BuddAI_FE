@@ -43,7 +43,7 @@ const Header: React.FC = () => {
           </SignedIn>
         </div>
       )}
-      <img className="logo" src="../public/tranparentlogo.png"  alt="logo"/>
+      <img className="logo" src="/tranparentlogo.png"  alt="logo"/>
       <h2 className=" welcome-msg">Welcome {username}</h2>
       <NavBarOtherPages />
     </div>
