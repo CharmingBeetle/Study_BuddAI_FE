@@ -45,6 +45,5 @@ docker run -p 5173:80 studybuddai-fe
 
 ## 🧠 Critical Knowledge
 - Uses **Clerk v5** for auth (`fallbackRedirectUrl` not `redirectUrl`)
-- State management: [describe your setup]
 - Docker context must point to sibling `study-buddai-deploy` repo
 

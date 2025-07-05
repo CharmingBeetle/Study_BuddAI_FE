@@ -131,7 +131,7 @@ async function getQuizQuestions(
   file_id: number;
 }) => {
   try {
-    const response = await axios.post(` http://localhost:8080/api/generate_quiz`,  {user_id,
+    const response = await axios.post(`http://localhost:8080/api/generate_quiz`,  {user_id,
       quiz_name,
       file_id,
     });
