@@ -2,9 +2,9 @@
 FROM node:20-slim AS builder
 WORKDIR /app
 COPY package*.json ./
+COPY .env .env.local
 RUN npm install
 COPY . .
-RUN cp .env .env.local
 RUN npm run build
 
 # Run stage
