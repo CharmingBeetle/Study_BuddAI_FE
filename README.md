@@ -166,3 +166,11 @@ docker run -p 5173:80 studybuddai-fe
 - Uses **Clerk v5** for auth (`fallbackRedirectUrl` not `redirectUrl`)
 - Docker context must point to sibling `study-buddai-deploy` repo
 
+
+## 👥 Contributors
+This project was developed as a team and part of the Northcoders Bootcamp with:
+ 
+[emerrafter1](https://github.com/emerrafter1)
+[joshnajoshy](https://github.com/joshnajoshy)
+[nimashakaranahala ](https://github.com/nimashakaranahala) 
+[Jamie145](https://github.com/Jamie145)
