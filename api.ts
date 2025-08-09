@@ -49,7 +49,7 @@ type Attempt = {
 }
 
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://13.42.154.217';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://api.nighthawk.website';
 
 const api = axios.create({
 baseURL: `${API_BASE_URL}/api` //AWS EC2
