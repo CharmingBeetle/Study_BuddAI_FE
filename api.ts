@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import axios from "axios";
 
 
@@ -48,14 +49,14 @@ type Attempt = {
 }
 
 const api = axios.create({
-// baseURL: `http://3.85.128.114:8080/api`,AWS
-  baseURL: `http://localhost:8080/api`
+baseURL: `${import.meta.env.VITE_API_URL}/api` //AWS EC2
+  // baseURL: `http://localhost:8080/api`
 });
 
 
 
 function uploadFiles(formData: FormData) {
-  return axios.post("http://localhost:8080/files/upload", formData, {
+  return axios.post(`${import.meta.env.VITE_API_URL}/files/upload`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -131,7 +132,7 @@ async function getQuizQuestions(
   file_id: number;
 }) => {
   try {
-    const response = await axios.post(`http://localhost:8080/api/generate_quiz`,  {user_id,
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/generate_quiz`,  {user_id,
       quiz_name,
       file_id,
     });
