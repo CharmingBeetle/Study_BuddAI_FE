@@ -48,15 +48,18 @@ type Attempt = {
   score: string
 }
 
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://13.42.154.217';
+
 const api = axios.create({
-baseURL: `${import.meta.env.VITE_API_URL}/api` //AWS EC2
+baseURL: `${API_BASE_URL}/api` //AWS EC2
   // baseURL: `http://localhost:8080/api`
 });
 
 
 
 function uploadFiles(formData: FormData) {
-  return axios.post(`${import.meta.env.VITE_API_URL}/files/upload`, formData, {
+  return axios.post(`${API_BASE_URL}/files/upload`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -132,7 +135,7 @@ async function getQuizQuestions(
   file_id: number;
 }) => {
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/generate_quiz`,  {user_id,
+    const response = await axios.post(`${API_BASE_URL}/api/generate_quiz`,  {user_id,
       quiz_name,
       file_id,
     });
