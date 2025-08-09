@@ -41,11 +41,6 @@ A React/TypeScript frontend application that allows users to upload PDF document
 ![Screenshot 9](./src/assets/Screenshot%20from%202025-04-30%2019-32-50.png)
 ![Screenshot 10](./src/assets/Screenshot%20from%202025-04-30%2019-33-00.png)
 
-#### Backend Requirements
-
-- Backend must be deployed with HTTPS (SSL certificate)
-- CORS configured to allow requests from Amplify domain
-- Environment variables properly configured
 
 ## 📁 Project Structure
 
@@ -131,6 +126,7 @@ docker run -p 5173:80 studybuddai-fe
   ```
 - **HTTPS Required**: Backend must use HTTPS to avoid mixed content errors
 
+
 ### AWS Amplify Setup
 
 1. Connect repository to Amplify
@@ -138,11 +134,13 @@ docker run -p 5173:80 studybuddai-fe
 3. Build settings: Build command `npm run build`, Publish directory `dist`
 4. Auto-deploy on push to main branch
 
+
 #### Backend Requirements
 
 - Backend must be deployed with HTTPS (SSL certificate)
 - CORS configured to allow requests from Amplify domain
 - Environment variables properly configured
+
 
 ## 🐛 Troubleshooting
 
@@ -150,13 +148,18 @@ docker run -p 5173:80 studybuddai-fe
 - Ensure backend uses HTTPS in production
 - Check `VITE_API_URL` is set correctly in Amplify Console
 
+
 ### API Connection Issues  
+
 - Verify backend is running at https://api.nighthawk.website/
 - Check browser network tab for failed requests
 - Confirm CORS is configured on backend
 
+
 ## 🔗 Related Repositories
+
 - **Backend**: [Study_BuddAI_BE](https://github.com/CharmingBeetle/Study_BuddAI_BE)
+
 
 ## 🧠 Critical Knowledge
 
