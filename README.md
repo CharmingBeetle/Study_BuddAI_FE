@@ -1,6 +1,6 @@
 # Study BuddAI - Frontend
 
-A React/TypeScript frontend application that allows users to upload PDF documents and generate interactive quizzes using AI.
+A React/TypeScript/MySQL full stack application that allows users to upload PDF documents and generate interactive quizzes using AI.
 
 ## Hosted App 
 [Frontend](https://main.d2kavmrnv3biu0.amplifyapp.com/)
